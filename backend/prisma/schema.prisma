@@ -1,0 +1,66 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Department {
+  dept_id         Int               @id @default(autoincrement())
+  department_name String            @unique
+  location        String
+  alerts          Emergency_alert[]
+  schedules       Schedule[]
+  tokens          Token_queue[]
+}
+
+model Blood_bank {
+  blood_id        Int    @id @default(autoincrement())
+  blood_type      String
+  units_available Int
+  critical_level  Int
+  status          String
+}
+
+model Drug_inventory {
+  drug_id       Int    @id @default(autoincrement())
+  drug_name     String
+  stock_qty     Int
+  reorder_level Int
+  status        String
+}
+
+model Emergency_alert {
+  alert_id      Int        @id @default(autoincrement())
+  code_type     String
+  alert_message String
+  time_stamp    DateTime
+  status        String
+  departmentId  Int
+  department    Department @relation(fields: [departmentId], references: [dept_id])
+}
+
+model Token_queue {
+  token_id     Int        @id @default(autoincrement())
+  departmentId Int
+  patient_name String
+  status       String
+  department   Department @relation(fields: [departmentId], references: [dept_id])
+}
+
+model Schedule {
+  schedule_id  Int        @id @default(autoincrement())
+  type         String
+  doctor_name  String
+  patient_name String
+  date         DateTime
+  start_time   DateTime
+  end_time     DateTime
+  status       String
+  departmentId Int
+  department   Department @relation(fields: [departmentId], references: [dept_id])
+}
