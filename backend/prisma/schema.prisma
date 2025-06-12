@@ -35,13 +35,12 @@ model Drug_inventory {
 }
 
 model Emergency_alert {
-  alert_id      Int        @id @default(autoincrement())
-  code_type     String
-  alert_message String
-  time_stamp    DateTime
-  status        String
-  departmentId  Int
-  department    Department @relation(fields: [departmentId], references: [dept_id])
+  alert_id     Int        @id @default(autoincrement())
+  code_type    String
+  status       String
+  departmentId Int
+  timestamp    String
+  department   Department @relation(fields: [departmentId], references: [dept_id])
 }
 
 model Token_queue {
@@ -57,10 +56,18 @@ model Schedule {
   type         String
   doctor_name  String
   patient_name String
-  date         DateTime
-  start_time   DateTime
-  end_time     DateTime
+  date         String
+  start_time   String
+  end_time     String
   status       String
   departmentId Int
   department   Department @relation(fields: [departmentId], references: [dept_id])
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  createdAt DateTime @default(now())
+  role     String  @default("user")
 }

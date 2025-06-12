@@ -1,10 +1,12 @@
-import express from 'express'
-import { tokensAdd, tokensDelete, tokensGet } from '../controller/tokens.controller.js'
+import { Router } from "express";
+import { tokensAdd, tokensGet, tokensUpdate, tokensDelete }from "../controller/tokens.controller";
+import { authenticationToken } from "../middleware/auth";
 
-const router = express.Router()
+const router = Router();
 
- router.get('/',tokensGet )
-router.post('/',tokensAdd)
-router.delete('/',tokensDelete)
+router.get("/",authenticationToken, tokensGet);
+router.post("/",authenticationToken, tokensAdd);
+router.put("/",authenticationToken, tokensUpdate);
+router.delete("/",authenticationToken, tokensDelete);
 
-export default router
+export default router;
