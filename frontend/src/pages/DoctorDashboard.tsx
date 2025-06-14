@@ -11,6 +11,7 @@ const DoctorDashboard = () => {
 
   const fetchTokens = async () => {
     const {slug} = useParams();
+    console.log(slug)
     const data = await getSyncedTokens({departmentName: slug});
     setTokens(data);
     setInitialLoadComplete(true); // Ensure promotion only runs after first fetch
