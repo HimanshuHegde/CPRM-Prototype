@@ -112,6 +112,7 @@ const OperatorDashboard = () => {
                 })
                 .map((token, index, arr) => {
                   let bgColor = "bg-gray-100";
+                  index
                   if (token.status === "waiting") {
                     const waitingTokens = arr.filter(t => t.status === "waiting");
                     if (waitingTokens[0]?.token_id === token.token_id) bgColor = "bg-yellow-100";

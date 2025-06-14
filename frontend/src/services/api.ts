@@ -1,7 +1,5 @@
 const Token = localStorage.getItem('token');
-import type { Blood_bank, Department, Drug_inventory, Emergency_alert } from "../../backend/generated/prisma";
-import type { TokenWithDepartment } from "../types/types";
-export const getSyncedTokens = async (data: {token_id?: number, departmentId?: number, status?: string,departmentName?:string}): Promise<TokenWithDepartment[]> => {
+export const getSyncedTokens = async (data: {token_id?: number, departmentId?: number, status?: string,departmentName?:string}): Promise<any[]> => {
   const res = await fetch("http://localhost:8080/api/tokens/get",{
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +14,7 @@ export const getSyncedTokens = async (data: {token_id?: number, departmentId?: n
   return res.json();
 };
 
-export const getDepartments = async (data:{dept_id?:number , department_name?:string , location?:string}): Promise<Department[]> => {
+export const getDepartments = async (data:{dept_id?:number , department_name?:string , location?:string}): Promise<any[]> => {
   const res = await fetch("http://localhost:8080/api/department/get",{
     headers: {
       "Content-Type": "application/json",
@@ -76,7 +74,7 @@ export const updateTokens = async (data: {token_id?: number, departmentId?: numb
   return res
 };
 
-export const getDrugInventory = async (data: {drug_name?:string , stock_qty?:number , reorder_level?:number , status?:string}): Promise<Drug_inventory[]> => {
+export const getDrugInventory = async (data: {drug_name?:string , stock_qty?:number , reorder_level?:number , status?:string}): Promise<any[]> => {
   const res = await fetch("http://localhost:8080/api/drugs/get",{
     headers: {
       "Content-Type": "application/json",
@@ -136,7 +134,7 @@ export const deleteDrug = async (data: {drug_id:number}): Promise<Response> => {
   return res
 };
 
-export const getBloodInventory = async (data: {blood_id?:number ,blood_type?:string , units_available?:number , critical_level?:number , status?:string}): Promise<Blood_bank[]> => {
+export const getBloodInventory = async (data: {blood_id?:number ,blood_type?:string , units_available?:number , critical_level?:number , status?:string}): Promise<any[]> => {
   const res = await fetch("http://localhost:8080/api/blood/get",{
     headers: {
       "Content-Type": "application/json",
@@ -196,7 +194,7 @@ export const deleteBloodUnit = async (data: {blood_id:number}): Promise<Response
   return res
 };
 
-export const alertGet = async (data: {alert_id?:number ,code_type?:string , status?:string,departmentId?:number,timestamp?:string,departmentName?:string}): Promise<Emergency_alert[]> => {
+export const alertGet = async (data: {alert_id?:number ,code_type?:string , status?:string,departmentId?:number,timestamp?:string,departmentName?:string}): Promise<any[]> => {
   const res = await fetch("http://localhost:8080/api/alert/get",{
     headers: {
       "Content-Type": "application/json",
