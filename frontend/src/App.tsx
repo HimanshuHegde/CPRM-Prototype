@@ -16,11 +16,11 @@ function App() {
   return (  
   
       <Routes>
-        <Route path="/alertOption" element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor"]}><AlertOptions /></ProtectedRoute>} />
-        <Route path = '/alertScreen' element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor"]}><Alerts /></ProtectedRoute>} />
-        <Route path = '/alertOperator' element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor"]}><HandleAlerts /></ProtectedRoute>} />
+        <Route path="/alertOption" element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor","Drug Inventory Operator","Blood Inventory Operator"]}><AlertOptions /></ProtectedRoute>} />
+        <Route path = '/alertScreen' element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor","Drug Inventory Operator","Blood Inventory Operator"]}><Alerts /></ProtectedRoute>} />
+        <Route path = '/alertOperator' element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor","Drug Inventory Operator","Blood Inventory Operator"]}><HandleAlerts /></ProtectedRoute>} />
         <Route path="/tokens" element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor"]}><TokenOptions /></ProtectedRoute>} />
-        <Route path ="/Dashboard" element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor"]}><Dashboard /></ProtectedRoute>} />
+        <Route path ="/Dashboard" element={<ProtectedRoute allowedRoles={["admin","Token Screen","Token Operator","Doctor","Drug Inventory Operator","Blood Inventory Operator"]}><Dashboard /></ProtectedRoute>} />
           <Route path="/tokens/TokenOperator/:departmentSlug" element={
             <ProtectedRoute allowedRoles={["admin","Token Operator"]}>
             <OperatorDashboard />
