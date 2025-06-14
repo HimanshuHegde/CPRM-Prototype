@@ -8,7 +8,7 @@ const DoctorDashboard = () => {
   const [onBreak, setOnBreak] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const {slug} = useParams();
-  console.log(slug)
+ 
 
 
   const fetchTokens = async () => {
