@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import { getSyncedTokens, deleteTokens, updateTokens } from "../services/api";
 import { logout } from "../services/authApi";
+import { useParams } from "react-router-dom";
 
 const DoctorDashboard = () => {
   const [tokens, setTokens] = useState<any[]>([]);
   const [onBreak, setOnBreak] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 
+
   const fetchTokens = async () => {
-    const data = await getSyncedTokens({});
+    const {slug} = useParams();
+    const data = await getSyncedTokens({departmentName: slug});
     setTokens(data);
     setInitialLoadComplete(true); // Ensure promotion only runs after first fetch
   };
