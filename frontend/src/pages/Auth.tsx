@@ -107,10 +107,6 @@ export default function AuthPage() {
   <option value="">Select Role</option>
   <option value="Doctor">Doctor</option>
   <option value="admin">Admin</option>
-  <option value="Blood Inventory Operator">Blood Inventory Operator</option>
-  <option value="Drug Inventory Operator">Drug Inventory Operator</option>
-  <option value="Token Screen">Token Screen</option>
-  <option value="Token Operator">Token Operator</option>
 </select>
               </div>
 
