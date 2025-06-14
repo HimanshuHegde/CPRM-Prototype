@@ -98,13 +98,20 @@ export default function AuthPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Role</label>
-                <input
-                  type="text"
-                  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
-                  required
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                />
+                <select
+  className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+  required
+  value={role}
+  onChange={(e) => setRole(e.target.value)}
+>
+  <option value="">Select Role</option>
+  <option value="Doctor">Doctor</option>
+  <option value="admin">Admin</option>
+  <option value="Blood Inventory Operator">Blood Inventory Operator</option>
+  <option value="Drug Inventory Operator">Drug Inventory Operator</option>
+  <option value="Token Screen">Token Screen</option>
+  <option value="Token Operator">Token Operator</option>
+</select>
               </div>
 
               <div>

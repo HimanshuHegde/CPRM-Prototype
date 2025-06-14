@@ -33,7 +33,7 @@ function App() {
           <ProtectedRoute allowedRoles={["admin","Token Screen"]}>
           <TokenDashboard />
           </ProtectedRoute>} />
-            <Route path="/drugInventory" element={<ProtectedRoute allowedRoles={["admin","drug Inventory Operator","Doctor"]}><DrugInventory /></ProtectedRoute>} />
+            <Route path="/drugInventory" element={<ProtectedRoute allowedRoles={["admin","Drug Inventory Operator","Doctor"]}><DrugInventory /></ProtectedRoute>} />
             <Route path="/blood_inventory" element={<ProtectedRoute allowedRoles={["admin","Blood Inventory Operator","Doctor"]}><BloodBank /></ProtectedRoute>} />
           
         <Route path="/" element={<AuthPage />} />
