@@ -49,7 +49,7 @@ const Dashboard = () => {
       >
         signout
       </button>
-      <h1 className="text-4xl font-bold mb-10 text-gray-800">Hospital Admin Dashboard</h1>
+      <h1 className="text-4xl font-bold mb-10 text-gray-800">Hospital Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-6xl">
         {navItems.map((item, idx) => (
           <div
