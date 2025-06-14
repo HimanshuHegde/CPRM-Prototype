@@ -1,6 +1,6 @@
 const Token = localStorage.getItem('token');
 export const getSyncedTokens = async (data: {token_id?: number, departmentId?: number, status?: string,departmentName?:string}): Promise<any[]> => {
-  const res = await fetch("http://localhost:8080/api/tokens/get",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/tokens/get",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -15,7 +15,7 @@ export const getSyncedTokens = async (data: {token_id?: number, departmentId?: n
 };
 
 export const getDepartments = async (data:{dept_id?:number , department_name?:string , location?:string}): Promise<any[]> => {
-  const res = await fetch("http://localhost:8080/api/department/get",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/department/get",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -30,7 +30,7 @@ export const getDepartments = async (data:{dept_id?:number , department_name?:st
 };
 
 export const addTokens = async (data: {departmentId:number, patient_name:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/tokens",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/tokens",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -45,7 +45,7 @@ export const addTokens = async (data: {departmentId:number, patient_name:string}
 };
 
 export const deleteTokens = async (data: {token_id?: number, departmentId?: number, status?: string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/tokens",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/tokens",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -60,7 +60,7 @@ export const deleteTokens = async (data: {token_id?: number, departmentId?: numb
 };
 
 export const updateTokens = async (data: {token_id?: number, departmentId?: number, status?: string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/tokens",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/tokens",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -75,7 +75,7 @@ export const updateTokens = async (data: {token_id?: number, departmentId?: numb
 };
 
 export const getDrugInventory = async (data: {drug_name?:string , stock_qty?:number , reorder_level?:number , status?:string}): Promise<any[]> => {
-  const res = await fetch("http://localhost:8080/api/drugs/get",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/drugs/get",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -90,7 +90,7 @@ export const getDrugInventory = async (data: {drug_name?:string , stock_qty?:num
 };
 
 export const createDrug = async (data: {drug_name:string , stock_qty:number , reorder_level:number , status:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/drugs",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/drugs",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -105,7 +105,7 @@ export const createDrug = async (data: {drug_name:string , stock_qty:number , re
 };
 
 export const updateDrug = async (data: {drug_id?:number ,drug_name?:string , stock_qty?:number , reorder_level?:number , status?:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/drugs",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/drugs",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -120,7 +120,7 @@ export const updateDrug = async (data: {drug_id?:number ,drug_name?:string , sto
 };
 
 export const deleteDrug = async (data: {drug_id:number}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/drugs",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/drugs",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -135,7 +135,7 @@ export const deleteDrug = async (data: {drug_id:number}): Promise<Response> => {
 };
 
 export const getBloodInventory = async (data: {blood_id?:number ,blood_type?:string , units_available?:number , critical_level?:number , status?:string}): Promise<any[]> => {
-  const res = await fetch("http://localhost:8080/api/blood/get",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/blood/get",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -150,7 +150,7 @@ export const getBloodInventory = async (data: {blood_id?:number ,blood_type?:str
 };
 
 export const createBloodUnit = async (data: {blood_type:string , units_available:number , critical_level:number , status:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/blood",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/blood",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -165,7 +165,7 @@ export const createBloodUnit = async (data: {blood_type:string , units_available
 };
 
 export const updateBloodUnit = async (data: {blood_id?:number ,blood_type?:string , units_available?:number , critical_level?:number , status?:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/blood",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/blood",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -180,7 +180,7 @@ export const updateBloodUnit = async (data: {blood_id?:number ,blood_type?:strin
 };
 
 export const deleteBloodUnit = async (data: {blood_id:number}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/blood",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/blood",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -195,7 +195,7 @@ export const deleteBloodUnit = async (data: {blood_id:number}): Promise<Response
 };
 
 export const alertGet = async (data: {alert_id?:number ,code_type?:string , status?:string,departmentId?:number,timestamp?:string,departmentName?:string}): Promise<any[]> => {
-  const res = await fetch("http://localhost:8080/api/alert/get",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/alert/get",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -210,7 +210,7 @@ export const alertGet = async (data: {alert_id?:number ,code_type?:string , stat
 };
 
 export const alertUpdate = async (data: {alert_id?:number ,code_type?:string , status?:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/alert",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/alert",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -225,7 +225,7 @@ export const alertUpdate = async (data: {alert_id?:number ,code_type?:string , s
 };
 
 export const alertDelete = async (data: {alert_id:number}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/alert",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/alert",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
@@ -240,7 +240,7 @@ export const alertDelete = async (data: {alert_id:number}): Promise<Response> =>
 };
 
 export const alertCreate = async (data: {code_type:string , status:string,departmentId:number,timestamp:string}): Promise<Response> => {
-  const res = await fetch("http://localhost:8080/api/alert",{
+  const res = await fetch("https://centralized-patient-resource-management.onrender.com/api/alert",{
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${Token}`,
