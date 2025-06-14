@@ -47,7 +47,7 @@ model Token_queue {
   token_id     Int        @id @default(autoincrement())
   departmentId Int
   patient_name String
-  status       String
+  status       String     @default("waiting")
   department   Department @relation(fields: [departmentId], references: [dept_id])
 }
 
@@ -66,6 +66,7 @@ model Schedule {
 
 model User {
   id       Int     @id @default(autoincrement())
+  name     String
   email    String  @unique
   password String
   createdAt DateTime @default(now())

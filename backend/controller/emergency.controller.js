@@ -5,24 +5,26 @@ const prisma = await initPrisma();
 
 export const emergencyGet = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let filter = []
         if(req.body){
-            let {alert_id, code_type, timestamp, status, departmentId} = req.body
+            let {alert_id, code_type, timestamp, status, departmentId,departmentName} = req.body
             filter = [
                 alert_id ? {alert_id} : undefined,
                 code_type ? {code_type} : undefined,
                 timestamp ? {timestamp} : undefined,
                 status ? {status} : undefined,
+                departmentName ? { department: { department_name: departmentName } } : undefined,
                 departmentId ? {departmentId} : undefined
             ].filter(Boolean)
         }
         let data = await prisma.emergency_alert.findMany(
             filter.length > 0 ? 
-            {where:{OR:filter}} :
-             {}
+            {where:{OR:filter},include:{department:true}} :
+             {include:{department:true}}
             );
         res.status(200).json(data);
     } catch (e) {
@@ -33,7 +35,8 @@ export const emergencyGet = async (req = request, res = response) => {
 
 export const emergencyAdd = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { code_type, timestamp, departmentId,status  } = req.body;
@@ -58,7 +61,8 @@ export const emergencyAdd = async (req = request, res = response) => {
 
 export const emergencyDelete = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { alert_id, code_type, timestamp, status, departmentId } = req.body;
@@ -82,20 +86,21 @@ export const emergencyDelete = async (req = request, res = response) => {
 
 export const emergencyUpdate = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { alert_id, code_type, timestamp, status, departmentId } = req.body;
+        let update = {}
+        if(code_type !== undefined) update.code_type = code_type;
+        if(timestamp !== undefined) update.timestamp = timestamp;
+        if(status !== undefined) update.status = status;
+        if(departmentId !== undefined) update.departmentId = departmentId;
         await prisma.emergency_alert.update({
             where: {
                 alert_id
             },
-            data: {
-                code_type,
-                timestamp,
-                status,
-                departmentId
-            }
+            data: update
         });
         res.status(200).json({ message: "success" });
     } catch (e) {

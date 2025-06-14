@@ -5,7 +5,8 @@ const prisma = await initPrisma();
 
 export const scheduleGet = async(req = request, res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let filters = [];
@@ -35,7 +36,8 @@ export const scheduleGet = async(req = request, res = response) => {
 
 export const scheduleAdd = async(req = request, res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {type,doctor_name,patient_name,date,start_time,end_time,status,departmentId} = req.body;
@@ -60,24 +62,25 @@ export const scheduleAdd = async(req = request, res = response) => {
 
 export const scheduleUpdate = async(req = request, res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {schedule_id,type,doctor_name,patient_name,date,start_time,end_time,status,departmentId} = req.body;
+        let update = {}
+        if(type !== undefined) update.type = type;
+        if(doctor_name !== undefined) update.doctor_name = doctor_name;
+        if(patient_name !== undefined) update.patient_name = patient_name;
+        if(date !== undefined) update.date = date;
+        if(start_time !== undefined) update.start_time = start_time;
+        if(end_time !== undefined) update.end_time = end_time;
+        if(status !== undefined) update.status = status;
+        if(departmentId !== undefined) update.departmentId = departmentId;
         await prisma.schedule.update({
             where: {
                 schedule_id
             },
-            data: {
-                type,
-                doctor_name,
-                patient_name,
-                date,
-                start_time,
-                end_time,
-                status,
-                departmentId
-            }
+            data: update
         });
         res.status(200).json({message:"success"})
     }catch(e){
@@ -88,7 +91,8 @@ export const scheduleUpdate = async(req = request, res = response) => {
 
 export const scheduleDelete = async(req = request, res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {schedule_id} = req.body;

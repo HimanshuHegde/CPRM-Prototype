@@ -1,15 +1,15 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import initPrisma from "../dbinit";
+import initPrisma from "../dbinit.js";
 
 const prisma = await initPrisma();
 const JWT_SECRET = process.env.JWT_SECRET 
 
 // SIGNUP
 export const signup = async (req, res) => {
-  const { email, password } = req.body;
+  const {name,role,email, password } = req.body;
 
-  if (!email || !password) return res.status(400).json({ error: "Missing fields" });
+  if (!name|| !role||!email || !password) return res.status(400).json({ error: "Missing fields" });
 
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) return res.status(409).json({ error: "User already exists" });
@@ -18,6 +18,8 @@ export const signup = async (req, res) => {
 
   const newUser = await prisma.user.create({
     data: {
+      name,
+      role,
       email,
       password: hashedPassword,
     },
@@ -43,6 +45,6 @@ export const signin = async (req, res) => {
   res.json({ token });
 };
 
-export const signout = async (req, res) => {
+export const  signout = async (req, res) => {
   res.json({ message: "Sign out successful" });
 };

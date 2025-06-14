@@ -5,7 +5,8 @@ const prisma = await initPrisma();
 
 export const drugAdd = async (req = request , res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {drug_name,stock_qty,reorder_level,status} = req.body
@@ -26,7 +27,8 @@ export const drugAdd = async (req = request , res = response) => {
 
 export const drugGet = async (req = request , res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let filters = []
@@ -52,20 +54,21 @@ export const drugGet = async (req = request , res = response) => {
 
 export const drugUpdate = async (req = request , res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {drug_id,drug_name,stock_qty,reorder_level,status} = req.body
+        let update = {}
+        if(drug_name !== undefined) update.drug_name = drug_name;
+        if(stock_qty !== undefined) update.stock_qty = stock_qty;
+        if(reorder_level !== undefined) update.reorder_level = reorder_level;
+        if(status !== undefined) update.status = status;
         await prisma.drug_inventory.update({
             where: {
                 drug_id
             },
-            data: {
-                drug_name,
-                stock_qty,
-                reorder_level,
-                status
-            }
+            data: update
         });
         res.status(200).json({message:"success"})
     }catch(e){
@@ -76,7 +79,8 @@ export const drugUpdate = async (req = request , res = response) => {
 
 export const drugDelete = async (req = request , res = response) => {
     try{
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let {drug_id,drug_name,status} = req.body

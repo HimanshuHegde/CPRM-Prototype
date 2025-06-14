@@ -5,7 +5,8 @@ const prisma = await initPrisma();
 
 export const departmentAdd = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { department_name,location} = req.body;
@@ -24,7 +25,8 @@ export const departmentAdd = async (req = request, res = response) => {
 
 export const departmentGet = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let filters = [];
@@ -48,7 +50,8 @@ export const departmentGet = async (req = request, res = response) => {
 
 export const departmentDelete = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { dept_id, department_name, location } = req.body;
@@ -71,18 +74,19 @@ export const departmentDelete = async (req = request, res = response) => {
 
 export const departmentUpdate = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { dept_id, department_name, location } = req.body;
+        let update = {}
+        if(department_name !== undefined) update.department_name = department_name;
+        if(location !== undefined) update.location = location;
         await prisma.department.update({
             where: {
                 dept_id,
             },
-            data: {
-                department_name,
-                location,
-            },
+            data: update
         });
         res.status(200).json({ message: "success" });
     } catch (e) {

@@ -5,7 +5,8 @@ const prisma = await initPrisma();
 
 export const bloodGet = async (req = request, res = response) => {
     try {
-        if (req.user.role !== 'admin') {
+        let role = ["admin","Doctor"]
+        if (!role.includes(req.user.role)) {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let filters = [];
@@ -54,16 +55,16 @@ export const bloodUpdate = async (req = request, res = response) => {
             return res.status(403).json({ message: 'Access denied: Admins only' });
         }
         let { blood_id, blood_type, units_available, critical_level,status } = req.body;
+        let update = {};
+        if (blood_type !== undefined) update.blood_type = blood_type;
+        if (units_available !== undefined) update.units_available = units_available;
+        if (critical_level !== undefined) update.critical_level = critical_level;
+        if (status !== undefined) update.status = status;
         await prisma.blood_bank.update({
             where: {
                 blood_id,
             },
-            data: {
-                blood_type,
-                units_available,
-                critical_level,
-                status,
-            },
+            data: update
         });
         res.status(200).json({ message: "success" });
     } catch (e) {
