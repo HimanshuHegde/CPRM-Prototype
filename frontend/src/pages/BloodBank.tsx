@@ -5,18 +5,17 @@ import {
   updateBloodUnit,
   deleteBloodUnit,
 } from "../services/api";
-import type { Blood_bank } from "../../backend/generated/prisma";
 import { logout } from "../services/authApi";
 
 const BloodBank = () => {
-  const [bloodUnits, setBloodUnits] = useState<Blood_bank[]>([]);
+  const [bloodUnits, setBloodUnits] = useState<any[]>([]);
   const [newUnit, setNewUnit] = useState({
     blood_type: "",
     units_available: "",
     critical_level: "",
   });
   const [editingId, setEditingId] = useState<number | null>(null);
-  const [editedUnit, setEditedUnit] = useState<Partial<Blood_bank>>({});
+  const [editedUnit, setEditedUnit] = useState<Partial<any>>({});
 
   const calculateStatus = (units: number, critical: number): string => {
     if (units === 0) return "out of stock";
@@ -61,7 +60,7 @@ const BloodBank = () => {
     fetchInventory();
   };
 
-  const handleEdit = (unit: Blood_bank) => {
+  const handleEdit = (unit: any) => {
     setEditingId(unit.blood_id);
     setEditedUnit({ ...unit });
   };

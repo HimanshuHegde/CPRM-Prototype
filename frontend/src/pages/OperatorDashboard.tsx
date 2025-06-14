@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSyncedTokens, addTokens, deleteTokens, getDepartments } from "../services/api";
-import type { TokenWithDepartment } from "../types/types";
 import { logout } from "../services/authApi";
-// import type { Department } from "../../backend/generated/prisma";
 
 const OperatorDashboard = () => {
   const { departmentSlug } = useParams<{ departmentSlug: string }>();
   const [departmentId, setDepartmentId] = useState<number | undefined>(undefined);
   const [patientName, setPatientName] = useState("");
-  const [tokens, setTokens] = useState<TokenWithDepartment[]>([]);
+  const [tokens, setTokens] = useState<any[]>([]);
 
   const fetchDepartment = async () => {
     

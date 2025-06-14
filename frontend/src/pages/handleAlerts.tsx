@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { alertGet, alertUpdate, alertCreate, getDepartments } from "../services/api";
-import type { AlertWithDepartment } from "../types/types";
-import type { Department } from "../../backend/generated/prisma";
 
 const HandleAlerts = () => {
-  const [alerts, setAlerts] = useState<AlertWithDepartment[]>([]);
+  const [alerts, setAlerts] = useState<any[]>([]);
   const [newCodeType, setNewCodeType] = useState("Code Blue");
   const [departmentId, setDepartmentId] = useState<number>(0); 
-  const [departments, setDepartments] = useState<Department[]>([]);
+  const [departments, setDepartments] = useState<any[]>([]);
 
   const fetchAlerts = async () => {
     const res = await alertGet({});

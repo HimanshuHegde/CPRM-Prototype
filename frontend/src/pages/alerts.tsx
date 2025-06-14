@@ -1,10 +1,9 @@
 // pages/alerts.tsx
 import { useEffect, useState } from "react";
 import { alertGet } from "../services/api";
-import type { AlertWithDepartment } from "../types/types";
 
 const Alerts = () => {
-  const [alerts, setAlerts] = useState<AlertWithDepartment[]>([]);
+  const [alerts, setAlerts] = useState<any[]>([]);
 
   const fetchAlerts = async () => {
     const res = await alertGet({status:"Active"}); 
@@ -21,7 +20,7 @@ const Alerts = () => {
     <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Live Emergency Alerts</h1>
       <div className="space-y-4">
-        {alerts.map((alert) => (
+        {alerts.map((alert:any) => (
           <div
             key={alert.alert_id}
             className={`p-4 rounded shadow-md ${

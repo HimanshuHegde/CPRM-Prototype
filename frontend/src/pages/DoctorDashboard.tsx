@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { getSyncedTokens, deleteTokens, updateTokens } from "../services/api";
-import type { TokenWithDepartment } from "../types/types";
 import { logout } from "../services/authApi";
 
 const DoctorDashboard = () => {
-  const [tokens, setTokens] = useState<TokenWithDepartment[]>([]);
+  const [tokens, setTokens] = useState<any[]>([]);
   const [onBreak, setOnBreak] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
 

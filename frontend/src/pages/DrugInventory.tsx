@@ -5,7 +5,6 @@ import {
   updateDrug,
   deleteDrug,
 } from "../services/api";
-import type { Drug_inventory } from "../../backend/generated/prisma";
 import { logout } from "../services/authApi";
 
 // 🔧 Status logic based on stock and reorder level
@@ -16,14 +15,14 @@ const getStatus = (stock_qty: number, reorder_level: number): string => {
 };
 
 const DrugInventory = () => {
-  const [drugs, setDrugs] = useState<Drug_inventory[]>([]);
+  const [drugs, setDrugs] = useState<any[]>([]);
   const [newDrug, setNewDrug] = useState({
     drug_name: "",
     stock_qty: 0,
     reorder_level: 0,
   });
   const [editingDrugId, setEditingDrugId] = useState<number | null>(null);
-  const [editedDrug, setEditedDrug] = useState<Partial<Drug_inventory>>({});
+  const [editedDrug, setEditedDrug] = useState<Partial<any>>({});
 
   const fetchInventory = async () => {
     const data = await getDrugInventory({});
@@ -57,7 +56,7 @@ const DrugInventory = () => {
     fetchInventory();
   };
 
-  const handleEditDrug = (drug: Drug_inventory) => {
+  const handleEditDrug = (drug: any) => {
     setEditingDrugId(drug.drug_id);
     setEditedDrug({ ...drug });
   };

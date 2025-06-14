@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getSyncedTokens } from "../services/api";
-import type { TokenWithDepartment } from "../types/types";
 import { useParams } from "react-router-dom";
 import { logout } from "../services/authApi";
 
 const TokenDashboard = () => {
   const { slug } = useParams() as { slug: string };
-  const [tokens, setTokens] = useState<TokenWithDepartment[]>([]);
+  const [tokens, setTokens] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -37,7 +36,7 @@ const TokenDashboard = () => {
     return () => clearInterval(interval);
   }, [slug]);
 
-  const getCardShadow = (token: TokenWithDepartment): string => {
+  const getCardShadow = (token: any): string => {
     if (token.status === "inprogress") {
       return "shadow-green-200 mb-6";
     }
