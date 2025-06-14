@@ -12,9 +12,9 @@ const app = express();
 const PORT = 8080;
 app.use(express.json());
 app.use(cors({
-  origin: 'https://centralized-patient-resource-manage.vercel.app/',
+  origin: 'https://centralized-patient-resource-manage.vercel.app',
   credentials: true,
-}));
+}));  
 app.use('/api/tokens', tokenRouter);
 app.use('/api/alert', emergencyRouter);
 app.use('/api/drugs', drugsRouter);
