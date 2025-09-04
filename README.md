@@ -1,4 +1,7 @@
 Centralized Patient Resource Management System (Prototype for UDAL)
+#Demo credential
+  email:admin@admin.com
+  pass:admin
 
 Full-Stack Healthcare Management Web Application  
 React + TypeScript | Node.js | PostgreSQL
